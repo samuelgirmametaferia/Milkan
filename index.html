@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>RadLab3D — WebGL Prototype</title>
+    <link rel="stylesheet" href="src/style.css" />
+    <!-- Import map to resolve bare 'three' specifiers used in example modules like OrbitControls -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.153.0/build/three.module.js"
+      }
+    }
+    </script>
+    <!-- Simple inline favicon to avoid 404 in console -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect width='100%25' height='100%25' fill='%2300aaff'/%3E%3C/svg%3E">
+  </head>
+  <body>
+    <div id="ui">
+      <h1>RadLab 3D — WebGL Prototype</h1>
+      <div class="controls">
+        <label>Source Type:
+          <select id="sourceType">
+            <option value="alpha">Alpha (α)</option>
+            <option value="beta">Beta (β)</option>
+            <option value="gamma">Gamma (γ)</option>
+          </select>
+        </label>
+        <label>Energy: <input id="energy" type="range" min="1" max="10" value="5"/></label>
+        <label>Intensity: <input id="intensity" type="range" min="1" max="20" value="8"/></label>
+        <label>Medium:
+          <select id="medium">
+            <option value="air">Air</option>
+            <option value="vacuum">Vacuum</option>
+            <option value="water">Water</option>
+          </select>
+        </label>
+        <button id="toggleCloud">Toggle Cloud Chamber</button>
+        <label>Magnetic Field: <input id="magField" type="range" min="0" max="5" value="1" step="0.1" /></label>
+        <hr />
+        <div class="projector">
+          <label><input type="checkbox" id="toggleProjector"> Holographic Projector</label>
+          <div id="projectorControls" style="display:none">
+            <label>Decay animation: <select id="decayType">
+              <option value="alpha">Alpha (α)</option>
+              <option value="beta">Beta (β-)</option>
+              <option value="gamma">Gamma (γ)</option>
+            </select></label>
+            <label>Animation speed: <input id="decaySpeed" type="range" min="0.2" max="3" step="0.1" value="1" /></label>
+            <div>
+              <button id="playDecay">Play</button>
+              <button id="pauseDecay">Pause</button>
+              <button id="stepDecay">Step</button>
+              <button id="resetDecay">Reset</button>
+            </div>
+          </div>
+        </div>
+        <button id="resetDose">Reset Dose</button>
+      </div>
+      <div id="hud">
+        <div>Geiger Counts: <span id="counts">0</span></div>
+        <div>Dose rate (µSv/h): <span id="doserate">0.00</span></div>
+        <div>Accumulated (µSv): <span id="accum">0.00</span></div>
+      </div>
+      <div id="notes">
+        <small>Drag shielding boxes into the beam path. Click a source to move it.</small>
+      </div>
+    </div>
+
+    <div id="canvas-container"></div>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+</html>
